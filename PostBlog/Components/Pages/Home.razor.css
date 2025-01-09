@@ -1,0 +1,33 @@
+﻿#landing {
+	margin-left: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	height: 100vh;
+	padding: 5vh;
+	width: 100%;
+	overflow: hidden;
+	z-index: 1;
+}
+
+#landing::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 30vh;
+	background: url("https://preview.redd.it/4vztk5m7p9651.jpg?width=1080&crop=smart&auto=webp&s=e747e5422e9839df2935fe4b23fefe25bf2cafcb") no-repeat center;
+	background-size: cover;
+	filter: blur(10px);
+	z-index: -1;
+}
+
+button {
+    position: relative;
+	z-index: 2;
+	padding: 10px 20px;
+	font-size: 16px;
+}
+
