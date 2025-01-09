@@ -1,6 +1,0 @@
-name: Deploy Razor
-
-on:
-    push:
-        branches:
-            - master
