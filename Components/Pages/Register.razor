@@ -1,0 +1,89 @@
+﻿@page "/register"
+@rendermode InteractiveServer
+
+<h3 class="text-center m-5">Register</h3>
+
+<form id="reg-form" class="container" @onsubmit="HandleSubmit">
+    <p>First Name</p>
+    <input type="text" id="first-name" name="first-name" class="form-control" @bind="firstName" />
+    <p>Username</p>
+    <input type="text" id="username" name="username" class="form-control" @bind="username" />
+    <p>Email</p>
+    <input type="email" id="email" name="email" class="form-control" @bind="email" />
+    <div class="flex-row" id="password-field-reg">
+        <p>Password</p>
+        <div class="input-group">
+            <input type="@(showPassword ? "text" : "password")" id="password" name="password" class="form-control" @bind="password" />
+            <button type="button" class="btn btn-secondary" @onclick="TogglePasswordVisibility">
+                @(showPassword ? "Hide" : "Show")
+            </button>
+        </div>
+        <p id="password-errors" class="text-danger">@passwordError</p>
+    </div>
+    <p id="form-errors" class="text-danger">@formError</p>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+@code {
+    private string firstName = string.Empty;
+    private string username = string.Empty;
+    private string email = string.Empty;
+    private string password = string.Empty;
+    private string passwordError = string.Empty;
+    private string formError = string.Empty;
+    private bool showPassword = false;
+    private string[] commonPasswords = new string[] 
+    { 
+        "password", "123456", "12345678", "123456789", "******", 
+        "qwerty", "abc123", "111111", "letmein", "welcome", 
+        "monkey", "admin", "1234", "passw0rd", "12345" 
+    };
+
+    private void PasswordChanged(string password)
+    {
+        if (password.Length < 4)
+        {
+            passwordError = "Password must be at least 4 characters long.";
+        }
+        else if (password.Length > 20)
+        {
+            passwordError = "Password must be at most 20 characters long.";
+        }
+        else if (commonPasswords.Contains(password))
+        {
+            passwordError = "Password is too common.";
+        }
+        else
+        {
+            passwordError = string.Empty;
+        }
+    }
+
+    private void TogglePasswordVisibility()
+    {
+        showPassword = !showPassword;
+    }
+
+    private void HandleSubmit()
+    {
+        if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+        {
+            formError = "All fields are required.";
+        }
+        else
+        {
+            formError = string.Empty;
+            // Proceed with form submission logic
+        }
+    }
+
+    private string Password
+    {
+        get => password;
+        set
+        {
+            password = value;
+            PasswordChanged(password);
+        }
+    }
+}

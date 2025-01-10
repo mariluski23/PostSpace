@@ -1,0 +1,36 @@
+﻿ºhtml, body {
+	margin: 0;
+	padding: 0;
+	height: 100%; /* Ensure the body takes up the full viewport */
+}
+
+#landing {
+	position: relative;
+	width: 100vw; /* Full viewport width */
+	height: 100vh; /* Full viewport height */
+	overflow: hidden; /* Prevent any unwanted scrollbars */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+	#landing::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-image: url(https://images.unsplash.com/photo-1476231682828-37e571bc172f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+		background-size: cover; /* Cover the entire area */
+		background-position: center;
+		filter: blur(7px); /* Apply the blur effect */
+		z-index: -1; /* Place the pseudo-element behind the content */
+	}
+
+.container {
+	position: relative; /* Ensure child content stays above the pseudo-element */
+	z-index: 1; /* Keeps Bootstrap content visible */
+	padding-top: 2rem; /* Add padding if needed */
+	padding-bottom: 2rem;
+}
